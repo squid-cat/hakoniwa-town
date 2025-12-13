@@ -1,0 +1,23 @@
+name: setup pnpm and check security
+
+on:
+  workflow_call:
+
+jobs:
+  setup-pnpm-security:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: ".node-version"
+          cache: "pnpm"
+
+      - name: Install safe-chain
+        run: curl -fsSL https://raw.githubusercontent.com/AikidoSec/safe-chain/main/install-scripts/install-safe-chain.sh | sh -s -- --ci --include-python
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile

@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+
+jobs:
+  setup:
+    uses: ./.github/workflows/setup-pnpm-security.yml
+
+  check:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: ".node-version"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run code check
+        run: pnpm check
