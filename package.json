@@ -1,0 +1,29 @@
+{
+  "name": "hakoniwa-town",
+  "version": "0.0.1",
+  "description": "Unity WebGL + React project",
+  "private": true,
+  "scripts": {
+    "copy-unity": "node scripts/copy-unity-build.js",
+    "dev": "pnpm --filter hakoniwa-town-frontend dev",
+    "build": "pnpm --filter hakoniwa-town-frontend build",
+    "check": "pnpm --filter hakoniwa-town-frontend check",
+    "fix": "pnpm --filter hakoniwa-town-frontend fix",
+    "prepare": "husky"
+  },
+  "packageManager": "pnpm@10.25.0",
+  "engines": {
+    "node": ">=20.11.0",
+    "pnpm": ">=10.25.0"
+  },
+  "keywords": [
+    "unity",
+    "webgl",
+    "react"
+  ],
+  "author": "squid-cat",
+  "license": "MIT",
+  "devDependencies": {
+    "husky": "^9.1.7"
+  }
+}
