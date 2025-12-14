@@ -9,6 +9,7 @@
     "ignoreUnknown": false,
     "includes": [
       "**",
+      "!public",
       "!**/node_modules",
       "!**/dist",
       "!**/build",
