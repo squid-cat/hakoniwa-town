@@ -38,9 +38,8 @@
 # 自動生成されたソリューション/プロジェクトファイル
 ExportedObj/
 .consulo/
-*.csproj
+# *.csproj と *.sln は Git 管理する（Unity が自動生成するが、チームで共有するため）
 *.unityproj
-*.sln
 *.suo
 *.tmp
 *.user
