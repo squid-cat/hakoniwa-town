@@ -96,6 +96,12 @@ InitTestScene*.unity*
 unity/Builds/
 unity/Build/
 
+# Unity プロジェクトの自動生成ファイル（unity/配下）
+unity/Library/
+unity/Temp/
+unity/Logs/
+unity/UserSettings/
+
 # ============================================
 # Node.js / pnpm
 # ============================================
