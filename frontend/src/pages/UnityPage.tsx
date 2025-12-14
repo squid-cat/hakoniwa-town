@@ -11,8 +11,11 @@ export const UnityPage = () => {
   return (
     <div
       style={{
-        maxWidth: "100%",
-        maxHeight: "100%",
+        width: "100vw",
+        height: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
       <Unity
@@ -20,6 +23,8 @@ export const UnityPage = () => {
         style={{
           width: "100%",
           height: "100%",
+          maxWidth: "100%",
+          maxHeight: "100%",
         }}
       />
     </div>
