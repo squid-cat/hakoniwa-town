@@ -4,6 +4,7 @@
   "description": "Unity WebGL + React project",
   "private": true,
   "scripts": {
+    "start": "pnpm --filter hakoniwa-town-frontend start",
     "copy-unity": "node scripts/copy-unity-build.js",
     "dev": "pnpm --filter hakoniwa-town-frontend dev",
     "build": "pnpm --filter hakoniwa-town-frontend build",
