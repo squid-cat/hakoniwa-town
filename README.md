@@ -6,11 +6,34 @@ Unity WebGL + React プロジェクト
 
 ### 必要な環境
 
-- Node.js >= 20.11.0 (セキュリティパッチ適用済みを推奨)
+- Node.js >= 20.19.0 (セキュリティパッチ適用済みを推奨)
   - セキュリティリリース: [2025 年 12 月 15 日のセキュリティリリース](https://nodejs.org/ja/blog/vulnerability/december-2025-security-releases) を参照
   - 最新の LTS バージョン（24.x）の使用を推奨
 - pnpm >= 10.25.0
 - Unity (WebGL ビルド対応)
+
+### Node.js のバージョン管理 (nodenv-win)
+
+このプロジェクトでは [nodenv-win](https://github.com/nodenv/nodenv-win) を使用してNode.jsのバージョンを管理しています。
+
+**nodenv-win のインストール:**
+
+1. nodenv-winをクローンします:
+   ```bash
+   git clone https://github.com/nodenv/nodenv-win.git $HOME/.nodenv
+   ```
+
+2. システムの環境変数に `%USERPROFILE%\.nodenv\bin` を追加します。
+
+3. コマンドプロンプトまたはGit Bashを再起動します。
+
+4. Node.js 20.19.0をインストールします:
+   ```bash
+   nodenv install 20.19.0
+   nodenv local 20.19.0
+   ```
+
+プロジェクトディレクトリに `.node-version` ファイルがあるため、自動的にNode.js 20.19.0が使用されます。
 
 ### pnpm のインストール
 
