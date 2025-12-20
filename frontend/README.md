@@ -23,6 +23,19 @@
 pnpm install
 ```
 
+## 環境変数の設定
+
+`frontend`ディレクトリに`.env`ファイルを作成してください：
+
+```bash
+# frontend/.env
+VITE_SOCKET_URL=http://localhost:3001
+```
+
+環境変数が設定されていない場合、デフォルトで`http://localhost:3001`が使用されます。
+
+`.env.example`ファイルを参考にしてください。
+
 ## 開発サーバーの起動
 
 ```bash
