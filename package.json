@@ -6,10 +6,14 @@
   "scripts": {
     "start": "pnpm --filter hakoniwa-town-frontend start",
     "copy-unity": "node scripts/copy-unity-build.js",
-    "dev": "pnpm --filter hakoniwa-town-frontend dev",
+    "dev": "pnpm --parallel --filter hakoniwa-town-frontend --filter hakoniwa-town-websocket dev",
+    "dev:frontend": "pnpm --filter hakoniwa-town-frontend dev",
+    "dev:websocket": "pnpm --filter hakoniwa-town-websocket dev",
     "build": "pnpm --filter hakoniwa-town-frontend build",
     "check": "pnpm --filter hakoniwa-town-frontend check",
-    "fix": "pnpm --filter hakoniwa-town-frontend fix",
+    "fix": "pnpm --filter hakoniwa-town-frontend --filter hakoniwa-town-websocket fix",
+    "fix:frontend": "pnpm --filter hakoniwa-town-frontend fix",
+    "fix:websocket": "pnpm --filter hakoniwa-town-websocket fix",
     "prepare": "husky"
   },
   "packageManager": "pnpm@10.25.0",
@@ -25,6 +29,7 @@
   "author": "squid-cat",
   "license": "MIT",
   "devDependencies": {
+    "@biomejs/biome": "^2.3.8",
     "husky": "^9.1.7"
   }
 }
