@@ -8,6 +8,7 @@ const ROOM_ID = "train-control-room";
 export const UnityPage = () => {
   const { unityProvider, sendMessage } = useUnity();
 
+  // WebSocket でメッセージを受信
   useEffect(() => {
     const socket = getSocket();
     joinRoom(ROOM_ID);
@@ -33,6 +34,12 @@ export const UnityPage = () => {
     return () => {
       socket.off("message", handleMessage);
     };
+  }, [sendMessage]);
+
+  useEffect(() => {
+    // TODO: コントローラーと接続する url を生成する
+    const controllerUrl = "https://github.com/squid-cat/hakoniwa-town";
+    sendMessage("TrainQRcodeController", "GenerateQRCode", controllerUrl);
   }, [sendMessage]);
 
   return (

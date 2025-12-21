@@ -9,13 +9,6 @@ public class TrainControllerManger : MonoBehaviour
     [SerializeField] private RawImage _rawImage;
     [SerializeField] private TextMeshProUGUI _loadingText;
 
-    private void Start()
-    {
-        _loadingText.gameObject.SetActive(false);
-
-        GenerateQRCode("https://github.com/squid-cat");
-    }
-
     public void GenerateQRCode(string url)
     {
         _loadingText.gameObject.SetActive(true);
