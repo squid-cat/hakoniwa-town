@@ -8,7 +8,10 @@ const httpServer = createServer(app);
 
 // 環境変数から設定を取得
 const PORT = Number(process.env.PORT) || 3001;
-const HOST = process.env.HOST || "localhost"; // デフォルトはlocalhost、特定のIP（例: 192.168.11.5）や0.0.0.0を指定可能
+// Railwayなどのクラウド環境では0.0.0.0を使用、ローカル開発ではHOST環境変数またはlocalhost
+const HOST =
+  process.env.HOST ||
+  (process.env.NODE_ENV === "production" ? "0.0.0.0" : "localhost");
 const CORS_ORIGIN = process.env.CORS_ORIGIN || "http://localhost:3000";
 
 const io = new Server(httpServer, {
@@ -95,4 +98,21 @@ httpServer.listen(PORT, HOST, () => {
   if (HOST !== "localhost") {
     console.log(`🌐 Accessible from network at ${HOST}:${PORT}`);
   }
+});
+
+// エラーハンドリング: 接続エラーをキャッチ
+httpServer.on("error", (error: NodeJS.ErrnoException) => {
+  if (error.code === "EADDRNOTAVAIL") {
+    console.error(
+      `❌ Error: Cannot bind to address ${HOST}:${PORT}. The address is not available.`,
+    );
+    console.error(
+      `💡 Tip: In cloud environments (Railway, Heroku, etc.), use HOST=0.0.0.0 or leave HOST unset.`,
+    );
+    console.error(`   Current HOST: ${HOST}`);
+    console.error(`   Current PORT: ${PORT}`);
+  } else {
+    console.error("❌ Server error:", error);
+  }
+  process.exit(1);
 });
