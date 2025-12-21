@@ -1,17 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Unity } from "react-unity-webgl";
 import { useUnity } from "../hooks/useUnity";
 import { getSocket, joinRoom } from "../lib/socket";
-
-const ROOM_ID = "train-control-room";
+import { generateUUID } from "../lib/uuid";
 
 export const UnityPage = () => {
   const { unityProvider, sendMessage } = useUnity();
+  const roomIdRef = useRef<string>(generateUUID());
 
   // WebSocket でメッセージを受信
   useEffect(() => {
     const socket = getSocket();
-    joinRoom(ROOM_ID);
+    joinRoom(roomIdRef.current);
 
     // WebSocketでメッセージを受信
     const handleMessage = (data: {
@@ -23,7 +23,7 @@ export const UnityPage = () => {
         value: number;
       };
     }) => {
-      if (data.type === "train-speed" && data.roomId === ROOM_ID) {
+      if (data.type === "train-speed" && data.roomId === roomIdRef.current) {
         // Unityにメッセージを送信
         sendMessage(data.data.gameObject, data.data.method, data.data.value);
       }
@@ -36,9 +36,10 @@ export const UnityPage = () => {
     };
   }, [sendMessage]);
 
+  // QRコードを生成
   useEffect(() => {
-    // TODO: コントローラーと接続する url を生成する
-    const controllerUrl = "https://github.com/squid-cat/hakoniwa-town";
+    const baseUrl = window.location.origin;
+    const controllerUrl = `${baseUrl}/controller/${roomIdRef.current}`;
     sendMessage("TrainQRcodeController", "GenerateQRCode", controllerUrl);
   }, [sendMessage]);
 

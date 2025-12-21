@@ -8,6 +8,7 @@ const httpServer = createServer(app);
 
 // 環境変数から設定を取得
 const PORT = Number(process.env.PORT) || 3001;
+const HOST = process.env.HOST || "localhost"; // デフォルトはlocalhost、特定のIP（例: 192.168.11.5）や0.0.0.0を指定可能
 const CORS_ORIGIN = process.env.CORS_ORIGIN || "http://localhost:3000";
 
 const io = new Server(httpServer, {
@@ -88,7 +89,10 @@ io.on("connection", (socket) => {
   });
 });
 
-httpServer.listen(PORT, () => {
-  console.log(`🚀 WebSocket server running on http://localhost:${PORT}`);
+httpServer.listen(PORT, HOST, () => {
+  console.log(`🚀 WebSocket server running on http://${HOST}:${PORT}`);
   console.log(`📡 CORS origin: ${CORS_ORIGIN}`);
+  if (HOST !== "localhost") {
+    console.log(`🌐 Accessible from network at ${HOST}:${PORT}`);
+  }
 });

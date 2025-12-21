@@ -30,13 +30,26 @@ pnpm install
 ```bash
 # websocket/.env
 PORT=3001
+HOST=localhost
 CORS_ORIGIN=http://localhost:3000
 ```
 
 環境変数が設定されていない場合、デフォルト値が使用されます：
 
 - `PORT`: 3001
+- `HOST`: localhost（デフォルトはローカルのみアクセス可能）
 - `CORS_ORIGIN`: http://localhost:3000
+
+### 特定の IP アドレスでリッスンする場合
+
+特定の IP アドレス（例: 192.168.11.5）でリッスンする場合は、`HOST`環境変数に IP アドレスを指定してください：
+
+```bash
+# websocket/.env
+PORT=3001
+HOST=192.168.11.5
+CORS_ORIGIN=http://192.168.11.5:3000
+```
 
 ## 開発サーバーの起動
 
