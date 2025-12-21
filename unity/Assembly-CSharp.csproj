@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\TrainControll.cs" />
+    <Compile Include="Assets\Scripts\TrainControllerManger.cs" />
     <Compile Include="Assets\Scripts\PressKeyTextInput.cs" />
     <Compile Include="Assets\Scripts\CameraControll.cs" />
   </ItemGroup>
@@ -640,6 +641,10 @@
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@ecb9724e46ff\Mono.Cecil.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="zxing.unity">
+      <HintPath>Assets\Plugins\zxing.unity.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="netstandard">
