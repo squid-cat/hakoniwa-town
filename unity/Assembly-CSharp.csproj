@@ -64,9 +64,10 @@
     <Analyzer Include="C:\Users\squid\develop\hakoniwa-town\unity\Library\PackageCache\com.unity.dt.app-ui@8ac7e730dd5d\Runtime\MVVM\SourceGenerators\netstandard2.0\MVVMSourceGenerators.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\TrainControll.cs" />
+    <Compile Include="Assets\Scripts\TrainNetworkState.cs" />
     <Compile Include="Assets\Scripts\NetworkRunnerManager.cs" />
     <Compile Include="Assets\Scripts\PressKeyTextInput.cs" />
+    <Compile Include="Assets\Scripts\TrainController.cs" />
     <Compile Include="Assets\Scripts\CameraControll.cs" />
   </ItemGroup>
   <ItemGroup>
