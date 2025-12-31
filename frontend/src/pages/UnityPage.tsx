@@ -1,8 +1,13 @@
+import { useEffect } from "react";
 import { Unity } from "react-unity-webgl";
 import { useUnity } from "../hooks/useUnity";
 
 export const UnityPage = () => {
-  const { unityProvider } = useUnity();
+  const { unityProvider, sendMessage } = useUnity();
+
+  useEffect(() => {
+    sendMessage("InitializeSceneChanger", "OnChangeCameraBySceneName", "MainGame");
+  }, [sendMessage]);
 
   return (
     <div
@@ -17,10 +22,9 @@ export const UnityPage = () => {
       <Unity
         unityProvider={unityProvider}
         style={{
-          width: "100%",
-          height: "100%",
-          maxWidth: "100%",
-          maxHeight: "100%",
+          width: "min(100vw, calc(100vh * 16 / 9))",
+          height: "min(100vh, calc(100vw * 9 / 16))",
+          aspectRatio: "16 / 9",
         }}
       />
     </div>

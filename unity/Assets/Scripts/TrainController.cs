@@ -1,16 +1,26 @@
 using UnityEngine;
-using UnityEngine.Splines;
-using TMPro;
+using UnityEngine.UI;
 
 public class TrainController : MonoBehaviour
 {
-    [SerializeField] private SplineAnimate _splineAnimate;
-
-    // “dÔ‚Ì•¨—ƒpƒ‰ƒ[ƒ^
+    // ï¿½dï¿½Ô‚Ì•ï¿½ï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^
     [SerializeField] private TrainNetworkState _trainNetworkState;
-    
 
-    void Update()
+    [SerializeField] private Slider _notchSlider;
+
+    private void Start()
     {
-     }
+        if (_notchSlider != null)
+        {
+            _notchSlider.onValueChanged.AddListener(SetNotch);
+        }
+    }
+
+    void SetNotch(float notch)
+    {
+        if (_trainNetworkState != null)
+        {
+            _trainNetworkState.CurrentNotch = Mathf.RoundToInt(notch);
+        }
+    }
 }

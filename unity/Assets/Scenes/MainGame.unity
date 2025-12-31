@@ -389,17 +389,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!114 &395599244 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1986462773553672765, guid: 27b5a834b1b193a439206fb901766724, type: 3}
-  m_PrefabInstance: {fileID: 9110159258972771023}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fabb25a02b56e9c4d9fbbb84ff076a6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TrainNetworkState
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,51 +516,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
---- !u!1 &475083716
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 475083718}
-  - component: {fileID: 475083717}
-  m_Layer: 0
-  m_Name: GameRauncher
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &475083717
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 475083716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c55b8041fcd17b4b83eaabaf6abc49f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NetworkRunnerManager
-  _networkRunnerPrefab: {fileID: -4441786566919664206, guid: 5862c8dcadf94d04caff12e0836ea7b2, type: 3}
---- !u!4 &475083718
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 475083716}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &735194766
 GameObject:
   m_ObjectHideFlags: 0
@@ -1601,7 +1545,7 @@ RectTransform:
   m_AnchoredPosition: {x: 170, y: -40}
   m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1312076832
+--- !u!1 &1204019189
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1609,36 +1553,35 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1312076834}
-  - component: {fileID: 1312076833}
+  - component: {fileID: 1204019191}
+  - component: {fileID: 1204019190}
   m_Layer: 0
-  m_Name: TrainController
+  m_Name: GameRauncher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1312076833
+--- !u!114 &1204019190
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1312076832}
+  m_GameObject: {fileID: 1204019189}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dc98de1f92447341b5414af3fc40001, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c55b8041fcd17b4b83eaabaf6abc49f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TrainController
-  _splineAnimate: {fileID: 735194769}
-  _trainNetworkState: {fileID: 395599244}
---- !u!4 &1312076834
+  m_EditorClassIdentifier: Assembly-CSharp::NetworkRunnerManager
+  _networkRunnerPrefab: {fileID: -4441786566919664206, guid: 5862c8dcadf94d04caff12e0836ea7b2, type: 3}
+--- !u!4 &1204019191
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1312076832}
+  m_GameObject: {fileID: 1204019189}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -2106,7 +2049,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 119436049674484614, guid: 27b5a834b1b193a439206fb901766724, type: 3}
       propertyPath: Flags
-      value: 1
+      value: 262145
       objectReference: {fileID: 0}
     - target: {fileID: 119436049674484614, guid: 27b5a834b1b193a439206fb901766724, type: 3}
       propertyPath: SortKey
@@ -2191,6 +2134,5 @@ SceneRoots:
   - {fileID: 735194768}
   - {fileID: 739388702}
   - {fileID: 1149535464}
-  - {fileID: 1312076834}
-  - {fileID: 475083718}
   - {fileID: 9110159258972771023}
+  - {fileID: 1204019191}

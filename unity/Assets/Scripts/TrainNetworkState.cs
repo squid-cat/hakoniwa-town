@@ -2,6 +2,7 @@ using Fusion;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Splines;
+using UnityEngine.UI;
 
 public class TrainNetworkState : NetworkBehaviour
 {
@@ -9,9 +10,11 @@ public class TrainNetworkState : NetworkBehaviour
     [Networked] public float CurrentSpeed { get; set; }
 
     [SerializeField] private SplineAnimate _splineAnimate;
-    [SerializeField] private float _accelerationUnit = 2.0f; // ƒmƒbƒ`1‚ ‚½‚è‚Ì‰Á‘¬“x
-    [SerializeField] private float _friction = 0.1f;        // ©‘RŒ¸‘¬
-    [SerializeField] private float _maxSpeed = 20f;         // Å‚‘¬“x
+    [SerializeField] private float _accelerationUnit = 2.0f; // ãƒãƒƒãƒ1ã‚ãŸã‚Šã®åŠ é€Ÿåº¦
+    [SerializeField] private float _friction = 0.1f;        // æ‘©æ“¦ä¿‚æ•°
+    [SerializeField] private float _maxSpeed = 20f;         // æœ€é«˜é€Ÿåº¦
+
+    [SerializeField] Slider _notchSlider;
 
     [SerializeField] private TextMeshProUGUI _TrainInfoText;
 
@@ -23,30 +26,35 @@ public class TrainNetworkState : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
+        if (_notchSlider != null)
+        {
+            _notchSlider.value = CurrentNotch;
+        }
+
         if (_splineAnimate == null || !Object || !Object.IsValid) return;
 
-        // 1. ‰Á‘¬“x‚ÌŒvZ
-        // ƒmƒbƒ`³: ‰Á‘¬, ƒmƒbƒ`•‰: ƒuƒŒ[ƒL
+        // 1. åŠ é€Ÿåº¦ã®è¨ˆç®—
+        // ãƒãƒƒãƒæ­£: åŠ é€Ÿ, ãƒãƒƒãƒè² : ãƒ–ãƒ¬ãƒ¼ã‚­
         float acceleration = CurrentNotch * _accelerationUnit;
 
-        // 2. ‘¬“x‚ÌXV (V = V + a*t)
+        // 2. é€Ÿåº¦ã®æ›´æ–° (V = V + a*t)
         CurrentSpeed += acceleration * Time.deltaTime;
 
-        // 3. ©‘RŒ¸‘¬‚Æ’â~ˆ—
+        // 3. æ‘©æ“¦ã¨æ¸›é€Ÿå‡¦ç†
         if (CurrentNotch == 0)
         {
-            // ‘Ä«‘–si­‚µ‚¸‚ÂŒ¸‘¬j
+            // æƒ°æ€§èµ°è¡Œï¼ˆæ¸›é€Ÿã™ã‚‹ï¼‰
             CurrentSpeed = Mathf.MoveTowards(CurrentSpeed, 0, _friction * Time.deltaTime);
         }
 
-        // 4. ‘¬“x‚ÌƒNƒ‰ƒ“ƒvi‹t‘––h~‚âÅ‚‘¬§ŒÀj
-        CurrentSpeed = Mathf.Max(0, CurrentSpeed); // ƒoƒbƒN‚³‚¹‚È‚¢ê‡
-        CurrentSpeed = Mathf.Clamp(CurrentSpeed, 0, _maxSpeed); // Å‚‘¬‚ğ’´‰ß‚µ‚È‚¢
+        // 4. é€Ÿåº¦ã®åˆ¶é™ï¼ˆè² ã®å€¤ã‚„æœ€é«˜é€Ÿåº¦ã‚’è¶…ãˆãªã„ï¼‰
+        CurrentSpeed = Mathf.Max(0, CurrentSpeed); // è² ã®å€¤ã«ãªã‚‰ãªã„
+        CurrentSpeed = Mathf.Clamp(CurrentSpeed, 0, _maxSpeed); // æœ€é«˜é€Ÿåº¦ã‚’è¶…ãˆãªã„
 
-        // 5. Œ»İ‚ÌˆÊ’u‚ğ•Û‘¶
+        // 5. ç¾åœ¨ã®ä½ç½®ã‚’ä¿å­˜
         var previousPosition = _splineAnimate.NormalizedTime;
 
-        // 6. SplineAnimate‚Ö‚Ì”½‰f
+        // 6. SplineAnimateã¸ã®åæ˜ 
         if (CurrentSpeed <= 0.01f)
         {
             if (_splineAnimate.IsPlaying) _splineAnimate.Pause();
@@ -57,34 +65,47 @@ public class TrainNetworkState : NetworkBehaviour
             _splineAnimate.MaxSpeed = CurrentSpeed;
         }
 
-        // 7. Œ»İ‚ÌˆÊ’u‚ğ”½‰f
+        // 7. ç¾åœ¨ã®ä½ç½®ã‚’åæ˜ 
         _splineAnimate.NormalizedTime = previousPosition;
-
-        // 8. ƒfƒoƒbƒOî•ñ‚Ì”½‰f
-        if (_TrainInfoText != null)
-        {
-            _TrainInfoText.text =
-                $"Notch  : {CurrentNotch}\n" +
-                $"Speed : {CurrentSpeed:F1} m/s";
-        }
     }
 
     void Update()
     {
         if (_TrainInfoText == null) return;
 
-        // 1. Runner‚ª‚È‚¢A‚à‚µ‚­‚Í‚Ü‚¾‹N“®iRunningj‚µ‚Ä‚¢‚È‚¢ê‡
+        // ãƒ‡ãƒãƒƒã‚°æƒ…å ±ã‚’è¿½åŠ 
+        string debugInfo = "";
+        if (Runner == null)
+        {
+            debugInfo = "Runner: null";
+        }
+        else if (!Runner.IsRunning)
+        {
+            debugInfo = $"Runner: {Runner.State}";
+        }
+        else if (!Object || !Object.IsValid)
+        {
+            debugInfo = $"Runner: Running, Object: {(Object != null ? Object.IsValid.ToString() : "null")}";
+        }
+
+        // 1. RunnerãŒãªãã€ã¾ãŸã¯ã¾ã èµ·å‹•ï¼ˆRunningï¼‰ã—ã¦ã„ãªã„å ´åˆ
         if (Runner == null || !Runner.IsRunning)
         {
-            _TrainInfoText.text = "Connecting to Network...";
+            _TrainInfoText.text = $"Connecting to Network...\n{debugInfo}";
             return;
         }
 
-        // 2. Ú‘±‚Í‚³‚ê‚Ä‚¢‚é‚ªA‚±‚ÌƒIƒuƒWƒFƒNƒg‚ª‚Ü‚¾ƒlƒbƒgƒ[ƒN‚É‘¶İ‚µ‚È‚¢ê‡
+        // 2. æ¥ç¶šã¯ã§ãã¦ã„ã‚‹ãŒã€ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒã¾ã ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã«å­˜åœ¨ã—ãªã„å ´åˆ
         if (!Object || !Object.IsValid)
         {
-            _TrainInfoText.text = "Spawning Train...";
+            _TrainInfoText.text = $"Spawning Train...\n{debugInfo}";
+            return;
         }
+
+        // 3. é€šå¸¸ã®æƒ…å ±è¡¨ç¤º
+        _TrainInfoText.text =
+            $"Notch  : {CurrentNotch}\n" +
+            $"Speed : {CurrentSpeed:F1} m/s";
     }
 
 }

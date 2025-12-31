@@ -9,17 +9,26 @@ public class NetworkRunnerManager : MonoBehaviour
 
     private async void Start()
     {
-        // NetworkRunner ‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬
+        // NetworkRunner ï¿½ÌƒCï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½Xï¿½ğ¶ï¿½
         var networkRunner = Instantiate(_networkRunnerPrefab);
-        // ƒQ[ƒ€ƒZƒbƒVƒ‡ƒ“‚ğŠJn(‹¤—Lƒ‚[ƒh)
+
+        DontDestroyOnLoad(networkRunner.gameObject);
+
+        var sceneManager = networkRunner.GetComponent<NetworkSceneManagerDefault>();
+        if (sceneManager == null)
+        {
+            sceneManager = networkRunner.gameObject.AddComponent<NetworkSceneManagerDefault>();
+        }
+
+        // ï¿½Qï¿½[ï¿½ï¿½ï¿½Zï¿½bï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Jï¿½n(ï¿½ï¿½ï¿½Lï¿½ï¿½ï¿½[ï¿½h)
         var result = await networkRunner.StartGame(new StartGameArgs()
         {
             GameMode = GameMode.Shared,
             IsVisible = false,
             SessionName = "TestSession",
             PlayerCount = 4,
-            Scene = SceneRef.FromIndex(SceneManager.GetActiveScene().buildIndex),
-            SceneManager = GetComponent<NetworkSceneManagerDefault>()
+            Scene = SceneRef.FromIndex(SceneUtility.GetBuildIndexByScenePath(SceneManager.GetActiveScene().path)),
+            SceneManager = sceneManager
         });
 
         Debug.Log($"StartGame Result: {result}");
