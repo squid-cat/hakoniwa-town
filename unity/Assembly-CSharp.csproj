@@ -65,7 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\TrainControll.cs" />
-    <Compile Include="Assets\Scripts\TrainControllerManger.cs" />
     <Compile Include="Assets\Scripts\NetworkRunnerManager.cs" />
     <Compile Include="Assets\Scripts\PressKeyTextInput.cs" />
     <Compile Include="Assets\Scripts\CameraControll.cs" />
