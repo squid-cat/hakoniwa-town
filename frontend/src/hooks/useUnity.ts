@@ -6,17 +6,12 @@ import { useUnityContext } from "react-unity-webgl";
  * @returns UnityコンテキストとsendMessage関数
  */
 export const useUnity = () => {
-  const { unityProvider, sendMessage, isLoaded, loadingProgression } = useUnityContext({
+  const props = useUnityContext({
     loaderUrl: "Build/public.loader.js",
     dataUrl: "Build/public.data",
     frameworkUrl: "Build/public.framework.js",
     codeUrl: "Build/public.wasm",
   });
 
-  return {
-    unityProvider,
-    sendMessage,
-    isLoaded,
-    loadingProgression,
-  };
+  return props;
 };

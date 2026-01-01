@@ -29,13 +29,11 @@ pnpm install
 
 ```bash
 # frontend/.env
-VITE_SOCKET_URL=http://localhost:3001
 VITE_BASE_URL=http://localhost:3000
 ```
 
 ### 環境変数の説明
 
-- `VITE_SOCKET_URL`: WebSocketサーバーのURL（デフォルト: `http://localhost:3001`）
 - `VITE_BASE_URL`: アプリケーションのベースURL（デフォルト: `window.location.origin`）
 
 ### 別端末からアクセスする場合
@@ -44,7 +42,6 @@ VITE_BASE_URL=http://localhost:3000
 
 ```bash
 # frontend/.env
-VITE_SOCKET_URL=http://192.168.1.100:3001
 VITE_BASE_URL=http://192.168.1.100:3000
 ```
 
