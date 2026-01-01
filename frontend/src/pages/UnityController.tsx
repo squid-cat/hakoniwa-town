@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Unity } from "react-unity-webgl";
 import { useUnity } from "../hooks/useUnity";
 
