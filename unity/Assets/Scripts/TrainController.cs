@@ -3,9 +3,7 @@ using UnityEngine.UI;
 
 public class TrainController : MonoBehaviour
 {
-    // �d�Ԃ̕����p�����[�^
     [SerializeField] private TrainNetworkState _trainNetworkState;
-
     [SerializeField] private Slider _notchSlider;
 
     private void Start()

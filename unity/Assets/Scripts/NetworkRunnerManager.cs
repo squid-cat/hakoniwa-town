@@ -9,7 +9,6 @@ public class NetworkRunnerManager : MonoBehaviour
 
     private async void Start()
     {
-        // NetworkRunner �̃C���X�^���X�𐶐�
         var networkRunner = Instantiate(_networkRunnerPrefab);
 
         DontDestroyOnLoad(networkRunner.gameObject);
@@ -20,7 +19,6 @@ public class NetworkRunnerManager : MonoBehaviour
             sceneManager = networkRunner.gameObject.AddComponent<NetworkSceneManagerDefault>();
         }
 
-        // �Q�[���Z�b�V�������J�n(���L���[�h)
         var result = await networkRunner.StartGame(new StartGameArgs()
         {
             GameMode = GameMode.Shared,

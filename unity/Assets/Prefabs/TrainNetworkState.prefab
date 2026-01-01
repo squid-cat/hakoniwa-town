@@ -45,6 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fabb25a02b56e9c4d9fbbb84ff076a6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrainNetworkState
+  _CurrentNotch: 0
+  _CurrentSpeed: 0
+  _splineAnimate: {fileID: 0}
+  _accelerationUnit: 2
+  _friction: 0.1
+  _maxSpeed: 20
+  _notchSlider: {fileID: 0}
+  _TrainInfoTextList: []
 --- !u!114 &119436049674484614
 MonoBehaviour:
   m_ObjectHideFlags: 0

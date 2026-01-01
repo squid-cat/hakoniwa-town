@@ -3,11 +3,7 @@ import { Unity } from "react-unity-webgl";
 import { useUnity } from "../hooks/useUnity";
 
 export const UnityController = () => {
-  const { unityProvider, sendMessage } = useUnity();
-
-  useEffect(() => {
-    sendMessage("InitializeSceneChanger", "OnChangeCameraBySceneName", "TrainController");
-  }, [sendMessage]);
+  const { unityProvider } = useUnity();
 
   return (
     <div

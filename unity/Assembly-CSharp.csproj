@@ -65,13 +65,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\TrainNetworkState.cs" />
-    <Compile Include="Assets\Scripts\InitializeSceneChanger.cs" />
     <Compile Include="Assets\Scripts\NetworkRunnerManager.cs" />
-    <Compile Include="Assets\Scripts\PressKeyTextInput.cs" />
+    <Compile Include="Assets\Scripts\DisplayDetailTextManager.cs" />
     <Compile Include="Assets\Scripts\TrainController.cs" />
     <Compile Include="Assets\Scripts\MainGameNetworkRunnerManager.cs" />
-    <Compile Include="Assets\Scripts\CameraControll.cs" />
     <Compile Include="Assets\Scripts\TrainControllerNetworkRunnerManager.cs" />
+    <Compile Include="Assets\Scripts\CameraController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Photon\Fusion\Plugins\NanoSockets\libnanosockets_LICENSE.txt" />
