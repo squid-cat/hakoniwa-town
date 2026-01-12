@@ -1576,7 +1576,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "-- Train Info --\r\nAcceleration: \r\nFriction: \r\nMaxSpeed: \n\r\n--
-    Session Info --\r\nPlayers: \r\nRegion: \r\nSessionId: \r\nYourPlayerId: "
+    Session Info --\nName:\r\nPlayers: \r\nRegion: \r\nYourPlayerId: "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2267,51 +2267,6 @@ RectTransform:
   m_AnchoredPosition: {x: 170, y: -40}
   m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1204019189
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1204019191}
-  - component: {fileID: 1204019190}
-  m_Layer: 0
-  m_Name: GameRauncher
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1204019190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1204019189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c55b8041fcd17b4b83eaabaf6abc49f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NetworkRunnerManager
-  _networkRunnerPrefab: {fileID: -4441786566919664206, guid: 5862c8dcadf94d04caff12e0836ea7b2, type: 3}
---- !u!4 &1204019191
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1204019189}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1220280793
 GameObject:
   m_ObjectHideFlags: 0
@@ -3100,7 +3055,7 @@ GameObject:
   - component: {fileID: 1627238778}
   - component: {fileID: 1627238777}
   m_Layer: 0
-  m_Name: Rails
+  m_Name: SplineRails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3979,6 +3934,5 @@ SceneRoots:
   - {fileID: 737116832}
   - {fileID: 1627238780}
   - {fileID: 735194768}
-  - {fileID: 1204019191}
   - {fileID: 9110159258972771023}
   - {fileID: 1384024915}

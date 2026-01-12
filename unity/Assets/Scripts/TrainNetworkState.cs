@@ -207,9 +207,9 @@ public class TrainNetworkState : NetworkBehaviour
             $"MaxSpeed: {_maxSpeed:F1}\n" +
             "\n" +
             "-- Session Info --\n" +
+            $"Name: {Runner.SessionInfo.Name}\n" +
             $"Players: {Runner.SessionInfo.PlayerCount}/{Runner.SessionInfo.MaxPlayers}\n" +
             $"Region: {Runner.SessionInfo.Region}\n" +
-            $"SessionId: {Runner.SessionInfo.Name}\n" +
             $"YourPlayerId: {Runner.GetPlayerUserId()}"
             );
     }

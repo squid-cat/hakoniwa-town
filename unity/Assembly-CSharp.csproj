@@ -65,10 +65,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\TrainNetworkState.cs" />
-    <Compile Include="Assets\Scripts\NetworkRunnerManager.cs" />
     <Compile Include="Assets\Scripts\DisplayDetailTextManager.cs" />
     <Compile Include="Assets\Scripts\TrainController.cs" />
-    <Compile Include="Assets\Scripts\MainGameNetworkRunnerManager.cs" />
+    <Compile Include="Assets\Scripts\MainMenuNetworkRunnerManager.cs" />
     <Compile Include="Assets\Scripts\TrainControllerNetworkRunnerManager.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
   </ItemGroup>
