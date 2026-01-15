@@ -9,8 +9,8 @@ using UnityEngine.UI;
 public class TrainNetworkState : NetworkBehaviour
 {
     [Networked]
-    public int CurrentNotch { get; set; }
-    [Networked] public float CurrentSpeed { get; set; }
+    public int CurrentNotch { get; set; } = 0;
+    [Networked] public float CurrentSpeed { get; set; } = 0f;
 
     [SerializeField] private SplineAnimate _splineAnimate;
     [SerializeField] private float _accelerationUnit = 2.0f; // ノッチ1あたりの加速度
@@ -24,15 +24,11 @@ public class TrainNetworkState : NetworkBehaviour
     [SerializeField] private List<TextMeshProUGUI> _TrainDebugInfoTextList = new List<TextMeshProUGUI>();
 
     private bool _isUpdatingSliderFromNetwork = false;
-    private int _previousNotch = -1; // 前回の値を保存
+    private int _previousNotch = 0; // 前回の値を保存
 
 
     public override void Spawned()
     {
-        CurrentNotch = 0;
-        CurrentSpeed = 0f;
-        _previousNotch = CurrentNotch;
-
         // Sliderの値変更イベントにリスナーを登録
         if (_notchSlider != null)
         {

@@ -17,7 +17,6 @@ public class MainMenuNetworkRunnerManager : MonoBehaviour, INetworkRunnerCallbac
     [SerializeField] private TMP_Text _infoText;
     [SerializeField] private List<Button> _joinButtons = new List<Button>();
 
-    private List<SessionInfo> _sessionList = new List<SessionInfo>();
     private bool _isProcessing = false;
 
     private void Start()
