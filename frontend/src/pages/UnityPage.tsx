@@ -1,16 +1,9 @@
-import { useEffect } from "react";
 import { Unity } from "react-unity-webgl";
 import { LoadingOverlay } from "../components/LoadingOverlay";
 import { useUnity } from "../hooks/useUnity";
 
 export const UnityPage = () => {
-  const { unityProvider, sendMessage, isLoaded, loadingProgression } = useUnity();
-
-  useEffect(() => {
-    if (isLoaded) {
-      sendMessage("InitializeSceneChanger", "OnChangeCameraBySceneName", "MainGame");
-    }
-  }, [isLoaded, sendMessage]);
+  const { unityProvider, isLoaded, loadingProgression } = useUnity();
 
   return (
     <div
