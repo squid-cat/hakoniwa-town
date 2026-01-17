@@ -60,7 +60,7 @@ public class WorldGenerator : MonoBehaviour
             spline.SetTangentMode(TangentMode.AutoSmooth);
 
             // I“_‚É‰w‚ğİ’u
-            float offsetDistance = 1.0f;
+            float offsetDistance = 2f;
 
             BezierKnot lastKnot = spline.Knots.Last();
             Vector3 knotPosition = lastKnot.Position;
