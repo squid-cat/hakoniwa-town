@@ -3790,6 +3790,8 @@ MonoBehaviour:
   splineContainer: {fileID: 1627238776}
   stationPrefab: {fileID: 919132149155446097, guid: cb410e135ef7ab5428ad4574d9983b9c, type: 3}
   plane: {fileID: 0}
+  splineInstantiates:
+  - {fileID: 1627238781}
 --- !u!4 &1895828845
 Transform:
   m_ObjectHideFlags: 0
