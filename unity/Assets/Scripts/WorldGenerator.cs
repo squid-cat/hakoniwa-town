@@ -6,6 +6,7 @@ public class WorldGenerator : MonoBehaviour
 {
     [SerializeField] private SplineContainer splineContainer;
     [SerializeField] private GameObject stationPrefab;
+    [SerializeField] private GameObject plane;
 
     void Start()
     {
