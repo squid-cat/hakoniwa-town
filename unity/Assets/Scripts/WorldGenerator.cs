@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Splines;
@@ -7,13 +8,14 @@ public class WorldGenerator : MonoBehaviour
     [SerializeField] private SplineContainer splineContainer;
     [SerializeField] private GameObject stationPrefab;
     [SerializeField] private GameObject plane;
+    [SerializeField] private SplineInstantiate[] splineInstantiates;
 
     void Start()
     {
-        // 駅を格納するコンテナ
+        // 駅格納用コンテナ
         GameObject stationContainer = new GameObject("StationContainer");
 
-        // unity editor で最初から存在するデフォルトのスプラインを削除
+        // Unity Editor で最初から存在するデフォルトのスプラインを削除
         Spline defaultSpline = splineContainer.Splines[0];
         splineContainer.RemoveSpline(defaultSpline);
 
@@ -26,7 +28,7 @@ public class WorldGenerator : MonoBehaviour
 
             spline.Add(new BezierKnot(currentPosition));
 
-            // 最初にレールをまっすぐ引く
+            // 最初にレールをまっすぐ伸ばす
             float x_before_rate = CalcRate(acceleration.x, acceleration.z, 1f);
             float z_before_rate = CalcRate(acceleration.z, acceleration.x, 0f);
 
@@ -36,8 +38,8 @@ public class WorldGenerator : MonoBehaviour
             spline.Add(new BezierKnot(currentPosition));
 
             for (int j = 0; j < 50; j++) {
-                acceleration.x = Mathf.Clamp(acceleration.x + Random.Range(-0.1f, 0.1f), 0f, 1f);
-                acceleration.z = Mathf.Clamp(acceleration.z + Random.Range(-0.1f, 0.1f), -1f, 1f);
+                acceleration.x = Mathf.Clamp(acceleration.x + UnityEngine.Random.Range(-0.1f, 0.1f), 0f, 1f);
+                acceleration.z = Mathf.Clamp(acceleration.z + UnityEngine.Random.Range(-0.1f, 0.1f), -1f, 1f);
 
                 float x_rate = CalcRate(acceleration.x, acceleration.z, 1f);
                 float z_rate = CalcRate(acceleration.z, acceleration.x, 0f);
@@ -48,7 +50,7 @@ public class WorldGenerator : MonoBehaviour
                 spline.Add(new BezierKnot(currentPosition));
             }
 
-            // 最後にレールをまっすぐ引く
+            // 最後にレールをまっすぐ伸ばす
             float x_after_rate = CalcRate(acceleration.x, acceleration.z, 1f);
             float z_after_rate = CalcRate(acceleration.z, acceleration.x, 0f);
 
@@ -57,7 +59,7 @@ public class WorldGenerator : MonoBehaviour
 
             spline.Add(new BezierKnot(currentPosition));
 
-            // 角度を自動調整
+            // 角度を滑らかに
             spline.SetTangentMode(TangentMode.AutoSmooth);
 
             // 終点に駅を設置
@@ -80,6 +82,29 @@ public class WorldGenerator : MonoBehaviour
 
             GameObject station = Instantiate(stationPrefab, stationPosition, stationRotation);
             station.transform.SetParent(stationContainer.transform);
+        }
+
+        // SplineInstantiate を遅延更新（ビルド後はAutoRefreshが機能しないため）
+        StartCoroutine(UpdateSplineInstantiatesDelayed());
+    }
+
+    /// <summary>
+    /// SplineInstantiate を遅延更新する（スプライン生成完了後に実行）
+    /// </summary>
+    private IEnumerator UpdateSplineInstantiatesDelayed()
+    {
+        // 1フレーム待つ（スプラインの内部状態が更新されるのを待つ）
+        yield return null;
+        
+        if (splineInstantiates != null)
+        {
+            foreach (var splineInstantiate in splineInstantiates)
+            {
+                if (splineInstantiate != null)
+                {
+                    splineInstantiate.UpdateInstances();
+                }
+            }
         }
     }
 
