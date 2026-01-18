@@ -225,5 +225,4 @@ public class TrainNetworkState : NetworkBehaviour
             text.text = debugText;
         }
     }
-
 }

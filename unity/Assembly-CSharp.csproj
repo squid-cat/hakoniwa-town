@@ -66,11 +66,13 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\DebugInitialize.cs" />
     <Compile Include="Assets\Scripts\TrainNetworkState.cs" />
+    <Compile Include="Assets\Scripts\TrainAnimation.cs" />
     <Compile Include="Assets\Scripts\WorldGenerator.cs" />
     <Compile Include="Assets\Scripts\DisplayDetailTextManager.cs" />
     <Compile Include="Assets\Scripts\TrainController.cs" />
     <Compile Include="Assets\Scripts\MainMenuNetworkRunnerManager.cs" />
     <Compile Include="Assets\Scripts\MainGameStartSwitcher.cs" />
+    <Compile Include="Assets\Scripts\FollowCamera.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
   </ItemGroup>
   <ItemGroup>
