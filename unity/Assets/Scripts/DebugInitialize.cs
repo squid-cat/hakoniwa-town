@@ -3,14 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class DebugInitialize
 {
-    // AfterSceneLoad ‚É‚·‚é‚±‚Æ‚ÅAÅ‰‚ÌƒV[ƒ“‚ª“Ç‚İ‚Ü‚ê‚½’¼Œã‚É”»’è‚µ‚Ü‚·
+    // AfterSceneLoad ã«ã™ã‚‹ã“ã¨ã§ã€æœ€åˆã®ã‚·ãƒ¼ãƒ³ãŒèª­ã¿è¾¼ã¾ã‚ŒãŸç›´å¾Œã«åˆ¤å®šã—ã¾ã™
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     static void OnAfterSceneLoad()
     {
 #if UNITY_EDITOR
         string sceneName = SceneManager.GetActiveScene().name;
 
-        // MainMenu ˆÈŠO‚©‚çŠJn‚³‚ê‚½ê‡
+        // MainMenu ä»¥å¤–ã‹ã‚‰é–‹å§‹ã•ã‚ŒãŸå ´åˆ
         if (sceneName != "MainMenu")
         {
             SceneManager.LoadScene("MainMenu");
@@ -21,13 +21,13 @@ public class DebugInitialize
 
     private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // “Ç‚İ‚Ü‚ê‚½‚Ì‚ª MainMenu ‚¾‚Á‚½‚ç
+        // èª­ã¿è¾¼ã¾ã‚ŒãŸã®ãŒ MainMenu ã ã£ãŸã‚‰
         if (scene.name == "MainMenu")
         {
-            // ƒCƒxƒ“ƒg“o˜^‚ğ‰ğœi1‰ñ‚¾‚¯Às‚·‚é‚½‚ßj
+            // ã‚¤ãƒ™ãƒ³ãƒˆç™»éŒ²ã‚’è§£é™¤ï¼ˆ1å›ã ã‘å®Ÿè¡Œã™ã‚‹ãŸã‚ï¼‰
             SceneManager.sceneLoaded -= OnSceneLoaded;
 
-            // MainMenuNetworkRunnerManager ‚ğ’T‚µ‚ÄÀs
+            // MainMenuNetworkRunnerManager ã‚’æ¢ã—ã¦å®Ÿè¡Œ
             var manager = Object.FindFirstObjectByType<MainMenuNetworkRunnerManager>();
             if (manager != null)
             {
