@@ -12,10 +12,10 @@ public class WorldGenerator : MonoBehaviour
 
     void Start()
     {
-        // ‰wŠi”[—pƒRƒ“ƒeƒi
+        // ï¿½wï¿½iï¿½[ï¿½pï¿½Rï¿½ï¿½ï¿½eï¿½i
         GameObject stationContainer = new GameObject("StationContainer");
 
-        // Unity Editor ‚ÅÅ‰‚©‚ç‘¶İ‚·‚éƒfƒtƒHƒ‹ƒg‚ÌƒXƒvƒ‰ƒCƒ“‚ğíœ
+        // Unity Editor ï¿½ÅÅï¿½ï¿½ï¿½ï¿½ç‘¶ï¿½İ‚ï¿½ï¿½ï¿½fï¿½tï¿½Hï¿½ï¿½ï¿½gï¿½ÌƒXï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½íœ
         Spline defaultSpline = splineContainer.Splines[0];
         splineContainer.RemoveSpline(defaultSpline);
 
@@ -28,7 +28,7 @@ public class WorldGenerator : MonoBehaviour
 
             spline.Add(new BezierKnot(currentPosition));
 
-            // Å‰‚ÉƒŒ[ƒ‹‚ğ‚Ü‚Á‚·‚®L‚Î‚·
+            // ï¿½Åï¿½ï¿½Éƒï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Lï¿½Î‚ï¿½
             float x_before_rate = CalcRate(acceleration.x, acceleration.z, 1f);
             float z_before_rate = CalcRate(acceleration.z, acceleration.x, 0f);
 
@@ -50,7 +50,7 @@ public class WorldGenerator : MonoBehaviour
                 spline.Add(new BezierKnot(currentPosition));
             }
 
-            // ÅŒã‚ÉƒŒ[ƒ‹‚ğ‚Ü‚Á‚·‚®L‚Î‚·
+            // ï¿½ÅŒï¿½Éƒï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Lï¿½Î‚ï¿½
             float x_after_rate = CalcRate(acceleration.x, acceleration.z, 1f);
             float z_after_rate = CalcRate(acceleration.z, acceleration.x, 0f);
 
@@ -59,10 +59,10 @@ public class WorldGenerator : MonoBehaviour
 
             spline.Add(new BezierKnot(currentPosition));
 
-            // Šp“x‚ğŠŠ‚ç‚©‚É
+            // ï¿½pï¿½xï¿½ï¿½ï¿½ï¿½ï¿½ç‚©ï¿½ï¿½
             spline.SetTangentMode(TangentMode.AutoSmooth);
 
-            // I“_‚É‰w‚ğİ’u
+            // ï¿½Iï¿½_ï¿½É‰wï¿½ï¿½İ’u
             float offsetDistance = 2f;
 
             BezierKnot lastKnot = spline.Knots.Last();
@@ -84,16 +84,16 @@ public class WorldGenerator : MonoBehaviour
             station.transform.SetParent(stationContainer.transform);
         }
 
-        // SplineInstantiate ‚ğ’x‰„XViƒrƒ‹ƒhŒã‚ÍAutoRefresh‚ª‹@”\‚µ‚È‚¢‚½‚ßj
+        // SplineInstantiate ï¿½ï¿½xï¿½ï¿½ï¿½Xï¿½Vï¿½iï¿½rï¿½ï¿½ï¿½hï¿½ï¿½ï¿½AutoRefreshï¿½ï¿½ï¿½@ï¿½\ï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½ßj
         StartCoroutine(UpdateSplineInstantiatesDelayed());
     }
 
     /// <summary>
-    /// SplineInstantiate ‚ğ’x‰„XV‚·‚éiƒXƒvƒ‰ƒCƒ“¶¬Š®—¹Œã‚ÉÀsj
+    /// SplineInstantiate ï¿½ï¿½xï¿½ï¿½ï¿½Xï¿½Vï¿½ï¿½ï¿½ï¿½iï¿½Xï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éï¿½ï¿½sï¿½j
     /// </summary>
     private IEnumerator UpdateSplineInstantiatesDelayed()
     {
-        // 1ƒtƒŒ[ƒ€‘Ò‚ÂiƒXƒvƒ‰ƒCƒ“‚Ì“à•”ó‘Ô‚ªXV‚³‚ê‚é‚Ì‚ğ‘Ò‚Âj
+        // 1ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ò‚Âiï¿½Xï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Ì“ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½Xï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½Ì‚ï¿½Ò‚Âj
         yield return null;
         
         if (splineInstantiates != null)

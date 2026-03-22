@@ -1065,7 +1065,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineAnimate
   m_Target: {fileID: 1627238776}
   m_PlayOnAwake: 0
-  m_LoopMode: 1
+  m_LoopMode: 0
   m_Method: 1
   m_Duration: 3.10559
   m_MaxSpeed: 1.61
