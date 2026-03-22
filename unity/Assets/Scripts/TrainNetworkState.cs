@@ -2,6 +2,7 @@ using Fusion;
 using NUnit.Framework;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
 using UnityEngine.UI;
@@ -13,6 +14,8 @@ public class TrainNetworkState : NetworkBehaviour
     [Networked] public float CurrentSpeed { get; set; } = 0f;
 
     [SerializeField] private SplineAnimate _splineAnimate;
+    [SerializeField] private SplineContainer splineContainer;
+
     [SerializeField] private float _accelerationUnit = 2.0f; // ノッチ1あたりの加速度
     [SerializeField] private float _friction = 0.1f;        // 摩擦係数
     [SerializeField] private float _maxSpeed = 20f;         // 最高速度
@@ -23,10 +26,18 @@ public class TrainNetworkState : NetworkBehaviour
     [SerializeField] private List<TextMeshProUGUI> _TrainInfoTextList = new List<TextMeshProUGUI>();
     [SerializeField] private List<TextMeshProUGUI> _TrainDebugInfoTextList = new List<TextMeshProUGUI>();
 
+    // 全長の距離
+    private float _totalSplineLength = 0f;
+    // 残り距離を計算するための変数
+    private float _remainingDistance = 0f;
+
     private bool _isUpdatingSliderFromNetwork = false;
     private int _previousNotch = 0; // 前回の値を保存
 
-
+    // 残り距離に掛ける係数
+    // NOTE: スピードと距離の単位が違うため、係数を掛けておおよその寸法を揃えるための係数
+    private static readonly float DISTANCE_EPSILON = 4f;
+    
     public override void Spawned()
     {
         // Sliderの値変更イベントにリスナーを登録
@@ -45,6 +56,12 @@ public class TrainNetworkState : NetworkBehaviour
         {
             // Runnerがまだ設定されていない場合は、Runnerなしで試行
             _cameraController.ApplyInitialCameraSetup();
+        }
+
+        // スプラインの全長を計算
+        if (splineContainer != null)
+        {
+            _totalSplineLength = splineContainer.CalculateLength();
         }
     }
 
@@ -134,11 +151,46 @@ public class TrainNetworkState : NetworkBehaviour
         else
         {
             if (!_splineAnimate.IsPlaying) _splineAnimate.Play();
-            _splineAnimate.MaxSpeed = CurrentSpeed;
+            _splineAnimate.MaxSpeed = CurrentSpeed;   
         }
 
         // 7. 現在の位置を反映
-        _splineAnimate.NormalizedTime = previousPosition;
+        _splineAnimate.NormalizedTime = previousPosition; // 位置は変えず、速度だけを更新
+
+
+        // 8. 現在のスプライン上の「終端までの残り弧長」（目安）
+        UpdateRemainingDistanceAlongSpline();
+    }
+
+    /// <summary>
+    /// 残り距離 ≒ 全弧長 × (1 - 進捗)。
+    /// <see cref="SplineAnimate.NormalizedTime"/> の小数部が現在ループ内の進捗 (0–1)（公式ドキュメント準拠）。
+    /// </summary>
+    private void UpdateRemainingDistanceAlongSpline()
+    {
+        SplineContainer container = _splineAnimate != null && _splineAnimate.Container != null
+            ? _splineAnimate.Container
+            : splineContainer;
+
+        if (container == null || container.Splines.Count == 0)
+        {
+            _remainingDistance = 0f;
+            return;
+        }
+
+        // 1. スプラインの全延長を計算
+        float totalLength = _totalSplineLength;
+
+        // 2. 現在の位置を取得
+        float t = _splineAnimate.NormalizedTime;
+        
+        // 3. 走行済みの距離
+        float traveledDistance = t * totalLength;
+
+        // 4. 残り距離
+        float remainingDistance = totalLength - traveledDistance;
+
+        _remainingDistance = remainingDistance * DISTANCE_EPSILON;
     }
 
     void Update()
@@ -194,7 +246,8 @@ public class TrainNetworkState : NetworkBehaviour
         // 4. 通常の情報表示
         SetTrainInfoText(
             $"Notch  : {CurrentNotch}\n" +
-            $"Speed : {CurrentSpeed:F2} m/s"
+            $"Speed : {CurrentSpeed:F2} cm/s\n" +
+            $"Remaining Distance : {_remainingDistance:F2} cm"
         );
         SetTrainDebugInfoText(
             "-- Train Info --\n" +
