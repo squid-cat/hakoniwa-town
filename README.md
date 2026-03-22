@@ -95,9 +95,7 @@ pnpm run fix
 
 ## ビルド
 
-```bash
-pnpm run build
-```
+Unity の Build タブから WebGL / Windows ないしは両方のビルドを選択できる
 
 ## プロジェクト構成
 
