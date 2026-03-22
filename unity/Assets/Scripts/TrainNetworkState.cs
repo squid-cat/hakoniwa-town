@@ -1,4 +1,5 @@
 using Fusion;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -50,6 +51,18 @@ public class TrainNetworkState : NetworkBehaviour
     public override void Spawned()
     {
         _hud.OnSpawnedInitialSlider(CurrentNotch);
+        StartCoroutine(DeferredSpawnedSetup());
+    }
+
+    /// <summary>
+    /// WebGL ではスポーン直後の描画・シーン統合が追いつかないので、1 フレーム後に初期化する。
+    /// </summary>
+    private IEnumerator DeferredSpawnedSetup()
+    {
+        // 1フレーム待つ関連の処理
+        yield return null;
+        if (!Object || !Object.IsValid) yield break;
+
         TrainCameraModule.ApplyInitialSetup(_cameraController, Runner);
         _simulation.CacheTotalSplineLength();
     }
