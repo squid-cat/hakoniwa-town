@@ -18,7 +18,7 @@ public sealed class TrainSimulationModule
 
     // 残り距離に掛ける係数
     // NOTE: スピードと距離の単位が違うため、係数を掛けておおよその寸法を揃えるための係数
-    private static readonly float DISTANCE_EPSILON = 4.2f;
+    private static readonly float DISTANCE_EPSILON = 1f;
 
     public float RemainingDistance => _remainingDistance;
 
