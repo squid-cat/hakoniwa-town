@@ -34,6 +34,11 @@ public sealed class TrainSimulationModule
         _accelerationUnit = accelerationUnit;
         _friction = friction;
         _maxSpeed = maxSpeed;
+
+        if (_splineAnimate != null)
+        {
+            _splineAnimate.Alignment = SplineAnimate.AlignmentMode.SplineElement;
+        }
     }
 
     public void CacheTotalSplineLength()

@@ -8,9 +8,14 @@ public class MainGameStartSwitcher : MonoBehaviour
 
     void Start()
     {
-        if (splineAnimate != null && targetContainer != null)
+        if (splineAnimate != null)
         {
-            splineAnimate.Container = targetContainer;
+            if (targetContainer != null)
+            {
+                splineAnimate.Container = targetContainer;
+            }
+
+            splineAnimate.Alignment = SplineAnimate.AlignmentMode.SplineElement;
         }
     }
 }
